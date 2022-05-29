@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #search{
+
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            overflow: auto;
+            padding-left: 10px;
+            
+        }
+        #main{
+            width:200px;
+            margin:auto;
+        }
+    </style>
+</head>
+
+<body>
+<div id="main"> 
+
+    <input id="inp" type="text"  placeholder=" search any movie" Oninput="debug(myfunc,2000)" />
+
+    <div id="search">
+        
+    </div>
+</div>
+
+</body>
+
+</html>
+<script>
+
+var id;
+    async function myfunc() {
+        let name = document.querySelector("#inp").value
+        let url = `http://www.omdbapi.com/?s=${name}&apikey=9c669058`
+
+        let res = await fetch(url)
+        let data = await res.json()
+        console.log(data.Search)
+        appending(data.Search)
+        
+    }
+
+function appending(data){
+    
+  if(data==undefined){
+     
+  }
+  else{ 
+var searchbox=document.querySelector("#search")
+searchbox.innerHTML=""
+data.forEach(function(ele){
+var p=document.createElement("p")
+p.innerText=ele.Title
+searchbox.append(p)
+
+})}
+
+
+}
+function debug( func,delay){
+    if(id){
+        clearTimeout(id)
+    }
+id=setTimeout(function(){
+func()
+
+
+},delay)
+
+
+}
+</script>
