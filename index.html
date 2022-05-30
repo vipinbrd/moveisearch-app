@@ -20,6 +20,27 @@
             width:200px;
             margin:auto;
         }
+        p:hover{
+            background-color: #5b1313;
+        }
+        img{
+            height: 300px;
+            width:100%;
+        }
+        #detail{
+
+            border: 1px solid black;
+            width:300px;
+            margin:auto; margin-top: 10px;
+            
+
+        }
+        h2{
+            text-align: center;
+        }
+        h6{
+            margin-left: 5px;
+        }
     </style>
 </head>
 
@@ -32,6 +53,8 @@
         
     </div>
 </div>
+<h2> See here your clicked movie info</h2>
+<div id="detail"></div>
 
 </body>
 
@@ -58,9 +81,15 @@ function appending(data){
   else{ 
 var searchbox=document.querySelector("#search")
 searchbox.innerHTML=""
-data.forEach(function(ele){
+data.forEach(function(ele,index){
 var p=document.createElement("p")
 p.innerText=ele.Title
+p.style.cursor="pointer"
+
+p.addEventListener("click",function(){
+
+    detail(data,index)
+})
 searchbox.append(p)
 
 })}
@@ -78,5 +107,20 @@ func()
 },delay)
 
 
+}
+function detail(data,index){
+    let a=data[index]
+var newapp=document.querySelector("#detail")
+newapp.innerHTML=null
+var h=document.createElement("h6")
+h.innerText=a.Title
+var h1=document.createElement("h6")
+h1.innerText=a.Year
+var h2=document.createElement("h6")
+h2.innerText=a.Type
+var img=document.createElement("img")
+img.src=a.Poster
+
+newapp.append(img,h2,h,h1)
 }
 </script>
